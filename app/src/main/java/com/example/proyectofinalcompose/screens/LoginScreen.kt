@@ -1,5 +1,7 @@
 package com.example.proyectofinalcompose.screens
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,12 +29,23 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.TextField
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.proyectofinalcompose.navigation.AppScreens
+import com.example.proyectofinalcompose.ui.theme.ProyectoFinalComposeTheme
+import com.example.proyectofinalcompose.viewmodel.LocalizationManager
 
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
+
+    val loginTitle = LocalizationManager.getString("login_title")
+    val emailLabel = LocalizationManager.getString("email_label")
+    val passwordLabel = LocalizationManager.getString("password_label")
+    val loginButton = LocalizationManager.getString("login_button")
+    val noAccountText = LocalizationManager.getString("no_account_text")
+
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -41,10 +54,11 @@ fun LoginScreen(navController: NavHostController) {
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Login",
+            text = loginTitle,
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(bottom = 32.dp)
         )
@@ -52,7 +66,7 @@ fun LoginScreen(navController: NavHostController) {
         TextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text("Email") },
+            label = { Text(emailLabel) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
         )
@@ -62,7 +76,7 @@ fun LoginScreen(navController: NavHostController) {
         TextField(
             value = password,
             onValueChange = { password = it },
-            label = { Text("Password") },
+            label = { Text(passwordLabel) },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
@@ -82,9 +96,25 @@ fun LoginScreen(navController: NavHostController) {
             onClick = { navController.navigate(AppScreens.QueryApi.route) },
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Log In")
+            Text(text = loginButton)
         }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(
+            text = noAccountText,
+            style = MaterialTheme.typography.bodyLarge,
+            modifier = Modifier.padding(bottom = 16.dp)
+            .clickable { navController.navigate(AppScreens.RegisterScreen.route) }
+            .align(Alignment.CenterHorizontally)
+        )
     }
 }
 
-
+@Preview(showBackground = true)
+@Composable
+fun LoginScreenPreview() {
+    ProyectoFinalComposeTheme {
+        LoginScreen(rememberNavController())
+    }
+}
