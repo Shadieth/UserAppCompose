@@ -28,6 +28,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.TextField
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -41,14 +42,14 @@ import com.example.proyectofinalcompose.viewmodel.LocalizationManager
 fun LoginScreen(navController: NavHostController) {
 
     val loginTitle = LocalizationManager.getString("login_title")
+    val userLabel = LocalizationManager.getString("user_label")
     val emailLabel = LocalizationManager.getString("email_label")
-    val passwordLabel = LocalizationManager.getString("password_label")
     val loginButton = LocalizationManager.getString("login_button")
     val noAccountText = LocalizationManager.getString("no_account_text")
 
+    var usuario by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-    var passwordVisible by remember { mutableStateOf(false) }
+    var emailVisible by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -64,9 +65,9 @@ fun LoginScreen(navController: NavHostController) {
         )
 
         TextField(
-            value = email,
-            onValueChange = { email = it },
-            label = { Text(emailLabel) },
+            value = usuario,
+            onValueChange = { usuario = it },
+            label = { Text(userLabel) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email)
         )
@@ -74,14 +75,14 @@ fun LoginScreen(navController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         TextField(
-            value = password,
-            onValueChange = { password = it },
-            label = { Text(passwordLabel) },
-            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            value = email,
+            onValueChange = { email = it },
+            label = { Text(emailLabel) },
+            visualTransformation = if (emailVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                IconButton(onClick = { passwordVisible = !passwordVisible }) {
+                IconButton(onClick = { emailVisible = !emailVisible }) {
                     Icon(
-                        imageVector = if (passwordVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                        imageVector = if (emailVisible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
                         contentDescription = "Toggle password visibility"
                     )
                 }
@@ -94,7 +95,10 @@ fun LoginScreen(navController: NavHostController) {
 
         Button(
             onClick = { navController.navigate(AppScreens.QueryApi.route) },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.tertiary
+            )
         ) {
             Text(text = loginButton)
         }

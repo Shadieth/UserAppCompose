@@ -1,16 +1,26 @@
 {
   "en": {
     "login_title": "Login",
+    "user_label": "User",
     "email_label": "Email",
-    "password_label": "Password",
     "login_button": "Log In",
-    "no_account_text": "If you don't have an account, create one here."
+    "no_account_text": "If you don't have an account, create one here.",
+    "register_title": "Create an account",
+    "name_label_register": "Enter your name",
+    "email_label_register": "Enter your email",
+    "confirm_email_register": "Confirm your email",
+    "register_button": "Register"
   },
   "es": {
-    "login_title": "Iniciar sesión",
+    "login_title": "Inicio de sesión",
+    "user_label": "Usuario",
     "email_label": "Correo electrónico",
-    "password_label": "Contraseña",
     "login_button": "Iniciar sesión",
-    "no_account_text": "Si no tienes una cuenta, créala aquí."
+    "no_account_text": "Si no tienes una cuenta, créala aquí.",
+    "register_title": "Crea una cuenta",
+    "name_label_register": "Introduce tu nombre",
+    "email_label_register": "Introduce tu correo",
+    "confirm_email_register": "Confirma tu correo",
+    "register_button": "Registrar"
   }
 }
