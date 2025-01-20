@@ -9,7 +9,10 @@
     "name_label_register": "Enter your name",
     "email_label_register": "Enter your email",
     "confirm_email_register": "Confirm your email",
-    "register_button": "Register"
+    "register_button": "Register",
+    "valid_text_error": "Please enter a valid email.",
+    "emails_dont_match_error": "Email addresses do not match.",
+    "complete_all_error": "Please fill in all the fields."
   },
   "es": {
     "login_title": "Inicio de sesión",
@@ -21,6 +24,10 @@
     "name_label_register": "Introduce tu nombre",
     "email_label_register": "Introduce tu correo",
     "confirm_email_register": "Confirma tu correo",
-    "register_button": "Registrar"
+    "register_button": "Registrar",
+    "valid_text_error": "Por favor, introduce un correo válido.",
+    "emails_dont_match_error": "Los correos electrónicos no coinciden.",
+    "complete_all_error": "Por favor, completa todos los campos."
   }
 }
+

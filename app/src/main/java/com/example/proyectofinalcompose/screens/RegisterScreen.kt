@@ -6,13 +6,17 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.example.proyectofinalcompose.data.Usuario
+import com.example.proyectofinalcompose.data.UsuarioRepositorio
 import com.example.proyectofinalcompose.ui.theme.ProyectoFinalComposeTheme
 import com.example.proyectofinalcompose.viewmodel.LocalizationManager
+import kotlinx.coroutines.launch
 
 @Composable
 fun RegisterScreen(navController: NavController) {
@@ -21,6 +25,11 @@ fun RegisterScreen(navController: NavController) {
     val emailLabelRegister = LocalizationManager.getString("email_label_register")
     val confirmEmailRegister = LocalizationManager.getString("confirm_email_register")
     val registerButton = LocalizationManager.getString("register_button")
+    val validTextError = LocalizationManager.getString("valid_text_error")
+    val emailsDontMatchError = LocalizationManager.getString("emails_dont_match_error")
+    val completeAllError = LocalizationManager.getString("complete_all_error")
+
+
 
     // Contenido de la pantalla de registro
     var name by remember { mutableStateOf("") }
@@ -28,6 +37,13 @@ fun RegisterScreen(navController: NavController) {
     var confirmEmail by remember { mutableStateOf("") }
     var isEmailValid by remember { mutableStateOf(true) }
     var errorMessage by remember { mutableStateOf("") }
+
+    // Usar un CoroutineScope para operaciones asíncronas
+    val scope = rememberCoroutineScope()
+    val context = LocalContext.current
+
+    // Obtener instancia del repositorio
+    val usuarioRepositorio = UsuarioRepositorio.getInstance(context)
 
     Column(
         modifier = Modifier
@@ -63,7 +79,7 @@ fun RegisterScreen(navController: NavController) {
             label = { Text(emailLabelRegister) },
             modifier = Modifier.fillMaxWidth(),
             keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email),
-            isError = !isEmailValid
+            isError = !isEmailValid // Aquí se controla el color del borde cuando hay un error
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -84,21 +100,35 @@ fun RegisterScreen(navController: NavController) {
             onClick = {
                 when {
                     !isValidEmail(email) -> {
-                        errorMessage = "Por favor, introduce un correo válido."
+                        errorMessage = validTextError
                     }
                     email != confirmEmail -> {
-                        errorMessage = "Los correos electrónicos no coinciden."
+                        errorMessage = emailsDontMatchError
                     }
                     email.isEmpty() || confirmEmail.isEmpty() || name.isEmpty() -> {
-                        errorMessage = "Por favor, completa todos los campos."
+                        errorMessage = completeAllError
                     }
                     else -> {
-                        navController.navigate("query_api")
+                        scope.launch() {
+                            // Guardar el usuario en la base de datos
+                            val newUsuario = Usuario(
+                                name = name,
+                                email = email
+                            )
+                            //Agregar usuario a la base de datos
+                            usuarioRepositorio.addUser(newUsuario)
+
+                            // Navegar a la siguiente pantalla después de registrar al usuario
+                            navController.navigate("query_api")
+                        }
                         errorMessage = "" // Limpiar cualquier mensaje previo
                     }
                 }
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.tertiary
+            )
         ) {
             Text(text = registerButton)
         }
@@ -123,6 +153,9 @@ fun isValidEmail(email: String): Boolean {
 @Composable
 fun RegisterScreenPreview() {
     ProyectoFinalComposeTheme {
-        RegisterScreen(rememberNavController())
+        RegisterScreen(
+            navController = rememberNavController(),
+        )
     }
 }
+
