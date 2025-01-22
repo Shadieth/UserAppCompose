@@ -18,20 +18,26 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.proyectofinalcompose.MainActivity
 import com.example.proyectofinalcompose.data.UsuarioRepositorio
 import com.example.proyectofinalcompose.navigation.AppScreens
 import com.example.proyectofinalcompose.ui.theme.ProyectoFinalComposeTheme
 import com.example.proyectofinalcompose.viewmodel.LocalizationManager
-import formatDate
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
 
-
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+
+    // Obtener el contexto y la actividad para detener el worker
+    val activity = context as? MainActivity
+
+    // Detener el worker cuando se navega a la segunda pantalla
+    LaunchedEffect(Unit) {
+        activity?.stopTimeWorker()
+    }
 
     // Obtener instancia del repositorio
     val usuarioRepositorio = UsuarioRepositorio.getInstance(context)
@@ -112,7 +118,7 @@ fun LoginScreen(navController: NavHostController) {
         Button(
             enabled = isFormValid,
             onClick = {
-                scope.launch() {
+                scope.launch {
                     val existingUser = usuarioRepositorio.getUserByEmail(email)
                     if (existingUser == null) {
                         navController.navigate(AppScreens.RegisterScreen.route)

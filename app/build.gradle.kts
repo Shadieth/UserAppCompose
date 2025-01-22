@@ -78,6 +78,9 @@ dependencies {
     implementation(libs.room.ktx)
     implementation(libs.androidx.espresso.core)
     implementation(libs.androidx.ui.graphics.lint)
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.foundation.layout.android)
     ksp(libs.room.ksp)
 
     // Firebase Firestore

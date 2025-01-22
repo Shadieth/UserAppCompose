@@ -21,6 +21,7 @@ compose = "1.7.6"
 uiGraphicsLint = "1.8.0-alpha07"  # Asegúrate de que Compose está actualizado con su versión correcta
 lottie = "5.2.0"          # Versión de Lottie
 lottie_compose = "6.0.0"
+foundationLayoutAndroid = "1.7.6"
 
 [libraries]
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
@@ -50,6 +51,7 @@ firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-fires
 androidx-material3-jvmstubs = { group = "androidx.compose.material3", name = "material3-jvmstubs", version.ref = "material3Jvmstubs" }
 androidx-animation-core-lint = { group = "androidx.compose.animation", name = "animation-core-lint", version.ref = "animationCoreLint" }
 androidx-ui-graphics-lint = { group = "androidx.compose.ui", name = "ui-graphics-lint", version.ref = "uiGraphicsLint" }
+androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
