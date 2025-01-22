@@ -49,4 +49,8 @@ class UsuarioRepositorio private constructor(private val usuarioDao: UsuarioDao)
     suspend fun updateLastAccessDate(email: String, lastAccessDate: Long) {
         usuarioDao.updateLastAccessDate(email, lastAccessDate)
     }
+
+   suspend fun getUserByName(name: String): Usuario? {
+        return usuarioDao.getUserByName(name)
+   }
 }

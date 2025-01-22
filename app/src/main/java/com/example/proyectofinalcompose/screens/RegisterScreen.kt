@@ -1,7 +1,10 @@
 package com.example.proyectofinalcompose.screens
 
+import android.icu.text.CaseMap.Title
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,8 +21,12 @@ import com.example.proyectofinalcompose.ui.theme.ProyectoFinalComposeTheme
 import com.example.proyectofinalcompose.viewmodel.LocalizationManager
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(navController: NavController) {
+
+
+
     val registerTitle = LocalizationManager.getString("register_title")
     val nameLabelRegister = LocalizationManager.getString("name_label_register")
     val emailLabelRegister = LocalizationManager.getString("email_label_register")
@@ -28,6 +35,8 @@ fun RegisterScreen(navController: NavController) {
     val validTextError = LocalizationManager.getString("valid_text_error")
     val emailsDontMatchError = LocalizationManager.getString("emails_dont_match_error")
     val completeAllError = LocalizationManager.getString("complete_all_error")
+    val userExistsError = LocalizationManager.getString("user_exists_error")
+    val emailExistsError = LocalizationManager.getString("email_exists_error")
 
 
 
@@ -52,10 +61,13 @@ fun RegisterScreen(navController: NavController) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(
-            text = registerTitle,
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(bottom = 32.dp)
+        TopAppBar(
+            title = { Text(registerTitle)},
+            navigationIcon = {
+                IconButton(onClick = { navController.popBackStack() }) {
+                    Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
+                }
+            }
         )
 
         // Nombre
@@ -110,6 +122,18 @@ fun RegisterScreen(navController: NavController) {
                     }
                     else -> {
                         scope.launch() {
+                            // Verificar si ya existe un usuario con el mismo correo o nombre
+                            val existingUserByEmail = usuarioRepositorio.getUserByEmail(email)
+                            val existingUserByName = usuarioRepositorio.getUserByName(name)
+                            if (existingUserByEmail != null) {
+                                errorMessage =
+                                return@launch
+                            }
+                            if (existingUserByName != null) {
+                                errorMessage = "Ya existe un usuario con este nombre"
+                                return@launch
+                            }
+
                             // Guardar el usuario en la base de datos
                             val newUsuario = Usuario(
                                 name = name,

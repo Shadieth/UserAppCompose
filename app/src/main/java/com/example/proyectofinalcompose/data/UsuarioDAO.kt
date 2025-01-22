@@ -27,5 +27,9 @@ interface UsuarioDao {
     @Query("UPDATE Usuario SET lastAccessDate = :lastAccessDate WHERE email = :email")
     suspend fun updateLastAccessDate(email: String, lastAccessDate: Long)
 
+    @Query("SELECT * FROM Usuario WHERE name = :name")
+    suspend fun getUserByName(name: String): Usuario?
+
+
 
 }

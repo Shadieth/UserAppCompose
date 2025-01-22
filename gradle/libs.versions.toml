@@ -19,8 +19,12 @@ material3Jvmstubs = "1.4.0-alpha05"
 animationCoreLint = "1.8.0-alpha07"
 compose = "1.7.6"
 uiGraphicsLint = "1.8.0-alpha07"  # Asegúrate de que Compose está actualizado con su versión correcta
+lottie = "5.2.0"          # Versión de Lottie
+lottie_compose = "6.0.0"
 
 [libraries]
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+lottie_compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie_compose" }
 androidx_compose_icons = { module = "androidx.compose.material:material-icons-extended", version.ref = "compose" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,7 +46,6 @@ room-ksp = { group = "androidx.room", name = "room-compiler", version.ref = "roo
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 retrofit-gson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "gson" }
 nav-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navCompose" }
-compose-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "composeMaterial3" }
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 androidx-material3-jvmstubs = { group = "androidx.compose.material3", name = "material3-jvmstubs", version.ref = "material3Jvmstubs" }
 androidx-animation-core-lint = { group = "androidx.compose.animation", name = "animation-core-lint", version.ref = "animationCoreLint" }

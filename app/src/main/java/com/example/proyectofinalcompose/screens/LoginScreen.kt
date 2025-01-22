@@ -118,7 +118,6 @@ fun LoginScreen(navController: NavHostController) {
                         navController.navigate(AppScreens.RegisterScreen.route)
                     } else {
                         if (existingUser.name == usuario) {
-                            val lastAccessDateFormatted = formatDate(existingUser.lastAccessDate ?: 0L)
                             val updatedUser = existingUser.copy(
                                 accessCount = existingUser.accessCount + 1,
                                 lastAccessDate = System.currentTimeMillis()

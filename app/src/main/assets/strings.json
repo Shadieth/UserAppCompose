@@ -12,8 +12,11 @@
     "register_button": "Register",
     "valid_text_error": "Please enter a valid email.",
     "emails_dont_match_error": "Email addresses do not match.",
-    "complete_all_error": "Please fill in all the fields."
+    "complete_all_error": "Please fill in all the fields.",
+    "user_exists_error": "A user with this name already exists",
+    "email_exists_error": "A user with this email already exists"
   },
+
   "es": {
     "login_title": "Inicio de sesión",
     "user_label": "Usuario",
@@ -27,7 +30,9 @@
     "register_button": "Registrar",
     "valid_text_error": "Por favor, introduce un correo válido.",
     "emails_dont_match_error": "Los correos electrónicos no coinciden.",
-    "complete_all_error": "Por favor, completa todos los campos."
+    "complete_all_error": "Por favor, completa todos los campos.",
+    "userExistsError": "Ya existe un usuario con este nombre",
+    "emailExistsError": "Ya existe un usuario con este correo electrónico"
   }
 }
 
