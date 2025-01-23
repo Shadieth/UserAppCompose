@@ -38,8 +38,6 @@ fun RegisterScreen(navController: NavController) {
     val userExistsError = LocalizationManager.getString("user_exists_error")
     val emailExistsError = LocalizationManager.getString("email_exists_error")
 
-
-
     // Contenido de la pantalla de registro
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -126,11 +124,11 @@ fun RegisterScreen(navController: NavController) {
                             val existingUserByEmail = usuarioRepositorio.getUserByEmail(email)
                             val existingUserByName = usuarioRepositorio.getUserByName(name)
                             if (existingUserByEmail != null) {
-                                errorMessage =
+                                errorMessage = emailExistsError
                                 return@launch
                             }
                             if (existingUserByName != null) {
-                                errorMessage = "Ya existe un usuario con este nombre"
+                                errorMessage = userExistsError
                                 return@launch
                             }
 

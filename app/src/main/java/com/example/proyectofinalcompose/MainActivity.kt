@@ -32,6 +32,7 @@ class MainActivity : ComponentActivity() {
         // Configuración de la UI
         setContent {
             ProyectoFinalComposeTheme {
+                setupLocalization() // Configuración del idioma
                 AppNavigation() // Configuración de la navegación principal
                 startTimeWorker() // Inicio del worker para actualizar la interfaz)
             }

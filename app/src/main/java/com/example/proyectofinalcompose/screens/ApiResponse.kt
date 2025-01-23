@@ -39,9 +39,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.proyectofinalcompose.MainActivity
 import com.example.proyectofinalcompose.retrofit.User
 import com.example.proyectofinalcompose.retrofit.UserViewModel
+import com.example.proyectofinalcompose.viewmodel.LocalizationManager
 
 @Composable
 fun ApiResponse(navController: NavController, userViewModel: UserViewModel = viewModel()) {
+
+    val userList = LocalizationManager.getString("user_list")
+    val logout = LocalizationManager.getString("logout")
 
     // Obtener el contexto y la actividad para detener el worker
     val context = LocalContext.current
@@ -91,7 +95,7 @@ fun ApiResponse(navController: NavController, userViewModel: UserViewModel = vie
                         containerColor = Color.Transparent,
                     ),
                 ) {
-                    Text(text = "Cerrar sesión",
+                    Text(text = logout,
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Bold // Establecer negrita
                         ),
@@ -104,7 +108,7 @@ fun ApiResponse(navController: NavController, userViewModel: UserViewModel = vie
 
             // Título
             Text(
-                text = "Lista de Usuarios",
+                text = userList,
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier
                     .padding(start = 16.dp)

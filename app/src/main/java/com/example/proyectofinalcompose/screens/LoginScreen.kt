@@ -47,6 +47,7 @@ fun LoginScreen(navController: NavHostController) {
     val emailLabel = LocalizationManager.getString("email_label")
     val loginButton = LocalizationManager.getString("login_button")
     val noAccountText = LocalizationManager.getString("no_account_text")
+    val errorEmail = LocalizationManager.getString("email_error")
 
     var usuario by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -105,7 +106,7 @@ fun LoginScreen(navController: NavHostController) {
         // Mensaje de error para email no válido
         if (!isEmailValid && email.isNotEmpty()) {
             Text(
-                text = "Correo electrónico no válido",
+                text = errorEmail,
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(top = 8.dp)
@@ -124,6 +125,7 @@ fun LoginScreen(navController: NavHostController) {
                         navController.navigate(AppScreens.RegisterScreen.route)
                     } else {
                         if (existingUser.name == usuario) {
+
                             val updatedUser = existingUser.copy(
                                 accessCount = existingUser.accessCount + 1,
                                 lastAccessDate = System.currentTimeMillis()

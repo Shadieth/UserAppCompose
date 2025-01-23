@@ -14,7 +14,10 @@
     "emails_dont_match_error": "Email addresses do not match.",
     "complete_all_error": "Please fill in all the fields.",
     "user_exists_error": "A user with this name already exists",
-    "email_exists_error": "A user with this email already exists"
+    "email_exists_error": "A user with this email already exists",
+    "user_list": "User List",
+    "logout": "Logout",
+    "email_error": "Invalid email address"
   },
 
   "es": {
@@ -32,7 +35,10 @@
     "emails_dont_match_error": "Los correos electrónicos no coinciden.",
     "complete_all_error": "Por favor, completa todos los campos.",
     "userExistsError": "Ya existe un usuario con este nombre",
-    "emailExistsError": "Ya existe un usuario con este correo electrónico"
+    "emailExistsError": "Ya existe un usuario con este correo electrónico",
+    "user_list": "Lista de Usuarios",
+    "logout": "Cerrar Sesión",
+    "email_error": "Correo electrónico no válido"
   }
 }
 
