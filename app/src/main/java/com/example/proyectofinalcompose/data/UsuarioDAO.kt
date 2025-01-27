@@ -8,7 +8,6 @@ import androidx.room.Update
 @Dao
 interface UsuarioDao {
 
-
     @Query("SELECT * FROM Usuario")
     suspend fun getAllUsers(): List<Usuario>
 

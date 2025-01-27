@@ -23,14 +23,10 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.proyectofinalcompose.MainActivity
 import com.example.proyectofinalcompose.navigation.AppScreens
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
+import com.example.proyectofinalcompose.viewmodel.LocalizationManager
 
 @Composable
 fun QueryApi(navController: NavController) {
-
-    val currentDate = getCurrentDate()
 
     // Obtener el contexto y la actividad para controlar el worker
     val context = LocalContext.current
@@ -38,8 +34,10 @@ fun QueryApi(navController: NavController) {
 
     // Iniciar el worker cuando se entra en la pantalla principal
     LaunchedEffect(Unit) {
-        activity?.startTimeWorker()
+        activity?.startTimeWorker(LocalizationManager.getString("api_toast"))
     }
+
+    val apiQuery = LocalizationManager.getString("api_query")
 
     Box(
         modifier = Modifier
@@ -68,19 +66,13 @@ fun QueryApi(navController: NavController) {
             ) {
                 Text(
                     style = MaterialTheme.typography.titleLarge,
-                    text = "Consultar API",
+                    text = apiQuery,
                     color = MaterialTheme.colorScheme.onTertiary // Color de texto adecuado para el color terciario
 
                 )
             }
         }
     }
-}
-
-// Función para obtener la fecha actual
-fun getCurrentDate(): String {
-    val format = SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault())
-    return format.format(Date())
 }
 
 @Preview(showBackground = true)

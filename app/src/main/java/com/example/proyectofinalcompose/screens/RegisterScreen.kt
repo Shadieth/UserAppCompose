@@ -1,6 +1,5 @@
 package com.example.proyectofinalcompose.screens
 
-import android.icu.text.CaseMap.Title
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -24,8 +23,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun RegisterScreen(navController: NavController) {
-
-
 
     val registerTitle = LocalizationManager.getString("register_title")
     val nameLabelRegister = LocalizationManager.getString("name_label_register")
@@ -119,7 +116,7 @@ fun RegisterScreen(navController: NavController) {
                         errorMessage = completeAllError
                     }
                     else -> {
-                        scope.launch() {
+                        scope.launch {
                             // Verificar si ya existe un usuario con el mismo correo o nombre
                             val existingUserByEmail = usuarioRepositorio.getUserByEmail(email)
                             val existingUserByName = usuarioRepositorio.getUserByName(name)

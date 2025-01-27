@@ -19,28 +19,28 @@ class MainActivity : ComponentActivity() {
     private val handler = Handler(Looper.getMainLooper()) // Handler para actualizar la interfaz en el hilo principal
     private var isWorkerRunning = false
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         // Inicialización de la base de datos
-        val database = DatabaseBuilder.getInstance(applicationContext)
+        DatabaseBuilder.getInstance(applicationContext)
 
         // Configuración del idioma de la aplicación
         setupLocalization()
 
+        val apiToast = LocalizationManager.getString("api_toast")
+
         // Configuración de la UI
         setContent {
             ProyectoFinalComposeTheme {
-                setupLocalization() // Configuración del idioma
                 AppNavigation() // Configuración de la navegación principal
-                startTimeWorker() // Inicio del worker para actualizar la interfaz)
+                startTimeWorker(apiToast) // Inicio del worker para actualizar la interfaz)
             }
         }
     }
 
     // Iniciar el worker de la hora, independiente de las pantallas
-     fun startTimeWorker() {
+     fun startTimeWorker(apiToast: String) {
         if (!isWorkerRunning) {
             isWorkerRunning = true
 
@@ -48,10 +48,10 @@ class MainActivity : ComponentActivity() {
                 override fun run() {
                     //Actualizar la hora
                     val currentTime = SimpleDateFormat("HH:mm", Locale.getDefault()).format(Date())
-                    showMessage("Son las $currentTime, puedes consultar la API")
+                    showMessage("$currentTime, $apiToast")
 
-                    // Repetir cada minuto
-                    handler.postDelayed(this, 60 * 100) // 60 segundos en milisegundos
+                    // Repetir cada 6 segundos
+                    handler.postDelayed(this, 60 * 100)
                 }
             })
 
@@ -82,8 +82,9 @@ class MainActivity : ComponentActivity() {
      */
     private fun setupLocalization() {
         // Aquí puedes configurar dinámicamente el idioma (por ejemplo, obteniéndolo de SharedPreferences).
-        val languageCode = "es" // Cambia esto según sea necesario (ej., "en", "fr", etc.).
+        val languageCode = "en" // Cambia esto según sea necesario (ej., "en", "fr", etc.).
         LocalizationManager.loadStrings(this, languageCode)
+
     }
 }
 

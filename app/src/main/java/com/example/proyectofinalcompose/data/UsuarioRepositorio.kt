@@ -21,11 +21,6 @@ class UsuarioRepositorio private constructor(private val usuarioDao: UsuarioDao)
 
     // Métodos del repositorio para interactuar con el DAO
 
-    // Obtener todos los usuarios
-    suspend fun getAllUsers(): List<Usuario> {
-        return usuarioDao.getAllUsers()
-    }
-
     // Obtener un usuario por su email
     suspend fun getUserByEmail(email: String): Usuario? {
         return usuarioDao.getUserByEmail(email)
@@ -38,16 +33,6 @@ class UsuarioRepositorio private constructor(private val usuarioDao: UsuarioDao)
 
     suspend fun updateUser(usuario: Usuario) {
         usuarioDao.updateUser(usuario)
-    }
-
-    // Incrementar el contador de accesos de un usuario
-    suspend fun incrementAccessCount(email: String) {
-        usuarioDao.incrementAccessCount(email)
-    }
-
-    // Actualizar la fecha del último acceso de un usuario
-    suspend fun updateLastAccessDate(email: String, lastAccessDate: Long) {
-        usuarioDao.updateLastAccessDate(email, lastAccessDate)
     }
 
    suspend fun getUserByName(name: String): Usuario? {
