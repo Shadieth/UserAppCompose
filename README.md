@@ -23,7 +23,7 @@ UserApp es una aplicación de Android desarrollada con Android Studio y Jetpack 
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone https://github.com/Shadieth/UserApp.git
+   git clone https://github.com/Shadieth/UserAppCompose.git
    ```
 
 2. **Abrir el proyecto**:
